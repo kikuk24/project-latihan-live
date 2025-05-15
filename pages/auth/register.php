@@ -24,7 +24,17 @@
                     
                     <!-- Card Body -->
                     <div class="card-body">
-                        <form>
+                        <form action="../../authentication/register.php" method="post">
+                            <!-- Name Input -->
+                            <div class="mb-4">
+                                <label for="nama" class="form-label">Nama</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">
+                                        <i class="bi bi-person-heart"></i>
+                                    </span>
+                                    <input name="nama" type="text" class="form-control py-2" id="nama" placeholder="masukkan nama kamu" required>
+                                </div>
+                            </div>
                             <!-- Email Input -->
                             <div class="mb-4">
                                 <label for="email" class="form-label">Email address</label>
@@ -32,7 +42,7 @@
                                     <span class="input-group-text bg-light">
                                         <i class="bi bi-envelope"></i>
                                     </span>
-                                    <input type="email" class="form-control py-2" id="email" placeholder="name@example.com" required>
+                                    <input name="email" type="email" class="form-control py-2" id="email" placeholder="name@example.com" required>
                                 </div>
                             </div>
                             
@@ -43,7 +53,7 @@
                                     <span class="input-group-text bg-light">
                                         <i class="bi bi-lock"></i>
                                     </span>
-                                    <input type="password" class="form-control py-2" id="password" placeholder="Enter your password" required>
+                                    <input name="password" type="password" class="form-control py-2" id="password" placeholder="Enter your password" required>
                                 </div>
                             </div>
                             
@@ -58,9 +68,9 @@
                                 <a href="#" class="text-decoration-none">Forgot password?</a>
                             </div>
                             
-                            <!-- Login Button -->
+                            <!-- Register Button -->
                             <button type="submit" class="btn btn-primary w-100 py-2 mb-4 fw-semibold">
-                                Login
+                                Register
                             </button>
                         </form>
                         
