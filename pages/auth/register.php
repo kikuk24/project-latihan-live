@@ -24,7 +24,7 @@
                     
                     <!-- Card Body -->
                     <div class="card-body">
-                        <form action="../../authentication/register.php" method="post">
+                        <form action="../../authentication/proses_register.php" method="post">
                             <!-- Name Input -->
                             <div class="mb-4">
                                 <label for="nama" class="form-label">Nama</label>
@@ -45,17 +45,17 @@
                                     <input name="email" type="email" class="form-control py-2" id="email" placeholder="name@example.com" required>
                                 </div>
                             </div>
-                            
                             <!-- Password Input -->
                             <div class="mb-4">
                                 <label for="password" class="form-label">Password</label>
                                 <div class="input-group">
                                     <span class="input-group-text bg-light">
-                                        <i class="bi bi-lock"></i>
+                                        <i class="bi bi-envelope"></i>
                                     </span>
-                                    <input name="password" type="password" class="form-control py-2" id="password" placeholder="Enter your password" required>
+                                    <input name="password" type="password" class="form-control py-2" id="password" placeholder="123456" required>
                                 </div>
                             </div>
+                            
                             
                             <!-- Remember Me & Forgot Password -->
                             <div class="d-flex justify-content-between mb-4">

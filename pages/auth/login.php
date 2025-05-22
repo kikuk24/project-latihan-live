@@ -24,7 +24,7 @@
                     
                     <!-- Card Body -->
                     <div class="card-body">
-                        <form>
+                        <form action="../../authentication/proses_login.php" method="post">
                             <!-- Email Input -->
                             <div class="mb-4">
                                 <label for="email" class="form-label">Email address</label>
@@ -32,7 +32,7 @@
                                     <span class="input-group-text bg-light">
                                         <i class="bi bi-envelope"></i>
                                     </span>
-                                    <input type="email" class="form-control py-2" id="email" placeholder="name@example.com" required>
+                                    <input type="email" class="form-control py-2" id="email" placeholder="name@example.com" required name="email">
                                 </div>
                             </div>
                             
@@ -43,7 +43,7 @@
                                     <span class="input-group-text bg-light">
                                         <i class="bi bi-lock"></i>
                                     </span>
-                                    <input type="password" class="form-control py-2" id="password" placeholder="Enter your password" required>
+                                    <input type="password" class="form-control py-2" id="password" placeholder="Enter your password" name="password" required>
                                 </div>
                             </div>
                             
