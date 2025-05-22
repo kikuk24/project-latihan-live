@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,24 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        .form-container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .preview-image {
+            max-width: 100%;
+            max-height: 200px;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
 </head>
+
 <body>
     <div class="container-fluid">
         <div class="row">
@@ -56,7 +74,7 @@
                             </a>
                         </li>
                     </ul>
-                    
+
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                         <span>Saved reports</span>
                     </h6>
@@ -76,7 +94,7 @@
                     </ul>
                 </div>
             </div>
-            
+
             <!-- Main Content -->
             <div class="col-md-9 col-lg-10 ms-sm-auto px-md-4">
                 <!-- Header -->
@@ -107,13 +125,15 @@
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="#">Profile</a></li>
                                 <li><a class="dropdown-item" href="#">Settings</a></li>
-                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
                                 <li><a class="dropdown-item" href="#">Sign out</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Breadcrumb -->
                 <nav aria-label="breadcrumb" class="mb-4">
                     <ol class="breadcrumb">
@@ -122,372 +142,99 @@
                         <li class="breadcrumb-item active" aria-current="page">Add New Product</li>
                     </ol>
                 </nav>
-                
+
                 <!-- Product Form -->
-                <div class="card border-0 shadow-sm mb-4">
-                    <div class="card-body p-4">
-                        <form class="needs-validation" novalidate>
-                            <!-- Form Tabs -->
-                            <ul class="nav nav-tabs mb-4" id="productTab" role="tablist">
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="basic-tab" data-bs-toggle="tab" data-bs-target="#basic-info" type="button" role="tab" aria-controls="basic-info" aria-selected="true">Basic Info</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="images-tab" data-bs-toggle="tab" data-bs-target="#images" type="button" role="tab" aria-controls="images" aria-selected="false">Images</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="pricing-tab" data-bs-toggle="tab" data-bs-target="#pricing" type="button" role="tab" aria-controls="pricing" aria-selected="false">Pricing</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="inventory-tab" data-bs-toggle="tab" data-bs-target="#inventory" type="button" role="tab" aria-controls="inventory" aria-selected="false">Inventory</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="seo-tab" data-bs-toggle="tab" data-bs-target="#seo" type="button" role="tab" aria-controls="seo" aria-selected="false">SEO</button>
-                                </li>
-                            </ul>
-                            
-                            <!-- Tab Content -->
-                            <div class="tab-content" id="productTabContent">
-                                <!-- Basic Info Tab -->
-                                <div class="tab-pane fade show active" id="basic-info" role="tabpanel" aria-labelledby="basic-tab">
-                                    <div class="row g-3">
-                                        <div class="col-12">
-                                            <label for="productName" class="form-label">Product Name <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="productName" placeholder="Enter product name" required>
-                                            <div class="invalid-feedback">
-                                                Please provide a product name.
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-12 col-md-6">
-                                            <label for="sku" class="form-label">SKU <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="sku" placeholder="Enter SKU" required>
-                                            <div class="invalid-feedback">
-                                                Please provide a SKU.
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-12 col-md-6">
-                                            <label for="barcode" class="form-label">Barcode (ISBN, UPC, GTIN, etc.)</label>
-                                            <input type="text" class="form-control" id="barcode" placeholder="Enter barcode">
-                                        </div>
-                                        
-                                        <div class="col-12">
-                                            <label for="shortDescription" class="form-label">Short Description <span class="text-danger">*</span></label>
-                                            <textarea class="form-control" id="shortDescription" rows="3" placeholder="Enter a short description" required></textarea>
-                                            <div class="invalid-feedback">
-                                                Please provide a short description.
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-12">
-                                            <label for="fullDescription" class="form-label">Full Description</label>
-                                            <div class="card">
-                                                <div class="card-header bg-light p-2">
-                                                    <div class="btn-toolbar">
-                                                        <div class="btn-group me-2">
-                                                            <button type="button" class="btn btn-sm btn-outline-secondary">
-                                                                <i class="bi bi-type-bold"></i>
-                                                            </button>
-                                                            <button type="button" class="btn btn-sm btn-outline-secondary">
-                                                                <i class="bi bi-type-italic"></i>
-                                                            </button>
-                                                            <button type="button" class="btn btn-sm btn-outline-secondary">
-                                                                <i class="bi bi-type-underline"></i>
-                                                            </button>
-                                                        </div>
-                                                        <div class="btn-group me-2">
-                                                            <button type="button" class="btn btn-sm btn-outline-secondary">
-                                                                <i class="bi bi-list-ul"></i>
-                                                            </button>
-                                                            <button type="button" class="btn btn-sm btn-outline-secondary">
-                                                                <i class="bi bi-list-ol"></i>
-                                                            </button>
-                                                        </div>
-                                                        <div class="btn-group">
-                                                            <button type="button" class="btn btn-sm btn-outline-secondary">
-                                                                <i class="bi bi-link"></i>
-                                                            </button>
-                                                            <button type="button" class="btn btn-sm btn-outline-secondary">
-                                                                <i class="bi bi-image"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-body p-0">
-                                                    <textarea class="form-control border-0" id="fullDescription" rows="6" placeholder="Enter full product description"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-12 col-md-6">
-                                            <label for="category" class="form-label">Category <span class="text-danger">*</span></label>
-                                            <select class="form-select" id="category" required>
-                                                <option value="" selected disabled>Select category</option>
-                                                <option value="1">Electronics</option>
-                                                <option value="2">Clothing</option>
-                                                <option value="3">Home & Garden</option>
-                                                <option value="4">Sports & Outdoors</option>
-                                                <option value="5">Toys & Games</option>
-                                            </select>
-                                            <div class="invalid-feedback">
-                                                Please select a category.
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-12 col-md-6">
-                                            <label for="brand" class="form-label">Brand</label>
-                                            <select class="form-select" id="brand">
-                                                <option value="" selected disabled>Select brand</option>
-                                                <option value="1">Apple</option>
-                                                <option value="2">Samsung</option>
-                                                <option value="3">Nike</option>
-                                                <option value="4">Adidas</option>
-                                                <option value="5">Sony</option>
-                                            </select>
-                                        </div>
-                                        
-                                        <div class="col-12">
-                                            <label for="tags" class="form-label">Tags</label>
-                                            <input type="text" class="form-control" id="tags" placeholder="Enter tags separated by commas">
-                                            <div class="form-text">Enter tags separated by commas (e.g., wireless, bluetooth, headphones)</div>
-                                        </div>
-                                    </div>
+                <div class="container">
+                    <div class="form-container">
+                        <h2 class="mb-4">Add New Product</h2>
+
+                        <?php
+                        // Display success or error messages if any
+                        if (isset($_GET['status'])) {
+                            if ($_GET['status'] == 'success') {
+                                echo '<div class="alert alert-success">Product added successfully!</div>';
+                            } else if ($_GET['status'] == 'error') {
+                                echo '<div class="alert alert-danger">Failed to add product. Please try again.</div>';
+                            }
+                        }
+                        ?>
+
+                        <form action="../../logic/simpan_product.php" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Product Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                                <div class="invalid-feedback">
+                                    Please provide a product name.
                                 </div>
-                                
-                                <!-- Images Tab -->
-                                <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
-                                    <div class="row g-3">
-                                        <div class="col-12">
-                                            <label class="form-label">Product Images <span class="text-danger">*</span></label>
-                                            <div class="card bg-light">
-                                                <div class="card-body text-center p-5">
-                                                    <i class="bi bi-cloud-arrow-up fs-1 text-secondary mb-3"></i>
-                                                    <h5>Drop files here or click to upload</h5>
-                                                    <p class="text-muted">Upload up to 10 images (Max size: 5MB each)</p>
-                                                    <input type="file" class="form-control" id="productImages" multiple accept="image/*" hidden>
-                                                    <button type="button" class="btn btn-outline-primary" onclick="document.getElementById('productImages').click()">
-                                                        <i class="bi bi-upload me-2"></i>Upload Images
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-12 mt-4">
-                                            <h6>Preview</h6>
-                                            <div class="row g-3">
-                                                <div class="col-6 col-md-3">
-                                                    <div class="card">
-                                                        <div class="position-relative">
-                                                            <img src="https://via.placeholder.com/150" class="card-img-top" alt="Product Image">
-                                                            <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0 m-2" title="Remove">
-                                                                <i class="bi bi-x"></i>
-                                                            </button>
-                                                            <div class="badge bg-success position-absolute bottom-0 start-0 m-2">Main Image</div>
-                                                        </div>
-                                                        <div class="card-body p-2">
-                                                            <div class="d-flex justify-content-between">
-                                                                <small class="text-muted">product1.jpg</small>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="mainImage" id="image1" checked>
-                                                                    <label class="form-check-label" for="image1">
-                                                                        Main
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6 col-md-3">
-                                                    <div class="card">
-                                                        <div class="position-relative">
-                                                            <img src="https://via.placeholder.com/150" class="card-img-top" alt="Product Image">
-                                                            <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0 m-2" title="Remove">
-                                                                <i class="bi bi-x"></i>
-                                                            </button>
-                                                        </div>
-                                                        <div class="card-body p-2">
-                                                            <div class="d-flex justify-content-between">
-                                                                <small class="text-muted">product2.jpg</small>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="mainImage" id="image2">
-                                                                    <label class="form-check-label" for="image2">
-                                                                        Main
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Pricing Tab -->
-                                <div class="tab-pane fade" id="pricing" role="tabpanel" aria-labelledby="pricing-tab">
-                                    <div class="row g-3">
-                                        <div class="col-12 col-md-6">
-                                            <label for="regularPrice" class="form-label">Regular Price <span class="text-danger">*</span></label>
-                                            <div class="input-group">
-                                                <span class="input-group-text">$</span>
-                                                <input type="number" class="form-control" id="regularPrice" placeholder="0.00" step="0.01" min="0" required>
-                                                <div class="invalid-feedback">
-                                                    Please provide a valid price.
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-12 col-md-6">
-                                            <label for="salePrice" class="form-label">Sale Price</label>
-                                            <div class="input-group">
-                                                <span class="input-group-text">$</span>
-                                                <input type="number" class="form-control" id="salePrice" placeholder="0.00" step="0.01" min="0">
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-12 col-md-6">
-                                            <label for="costPrice" class="form-label">Cost Price</label>
-                                            <div class="input-group">
-                                                <span class="input-group-text">$</span>
-                                                <input type="number" class="form-control" id="costPrice" placeholder="0.00" step="0.01" min="0">
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-12 col-md-6">
-                                            <label for="taxClass" class="form-label">Tax Class</label>
-                                            <select class="form-select" id="taxClass">
-                                                <option value="standard">Standard</option>
-                                                <option value="reduced">Reduced Rate</option>
-                                                <option value="zero">Zero Rate</option>
-                                            </select>
-                                        </div>
-                                        
-                                        <div class="col-12">
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" id="scheduleSale">
-                                                <label class="form-check-label" for="scheduleSale">Schedule Sale</label>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-12 col-md-6">
-                                            <label for="saleStart" class="form-label">Sale Start Date</label>
-                                            <input type="date" class="form-control" id="saleStart">
-                                        </div>
-                                        
-                                        <div class="col-12 col-md-6">
-                                            <label for="saleEnd" class="form-label">Sale End Date</label>
-                                            <input type="date" class="form-control" id="saleEnd">
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Inventory Tab -->
-                                <div class="tab-pane fade" id="inventory" role="tabpanel" aria-labelledby="inventory-tab">
-                                    <div class="row g-3">
-                                        <div class="col-12 col-md-6">
-                                            <label for="sku" class="form-label">SKU <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="inventorySku" placeholder="Enter SKU" required>
-                                        </div>
-                                        
-                                        <div class="col-12 col-md-6">
-                                            <label for="stockStatus" class="form-label">Stock Status <span class="text-danger">*</span></label>
-                                            <select class="form-select" id="stockStatus" required>
-                                                <option value="instock">In Stock</option>
-                                                <option value="outofstock">Out of Stock</option>
-                                                <option value="onbackorder">On Backorder</option>
-                                            </select>
-                                        </div>
-                                        
-                                        <div class="col-12">
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" id="manageStock" checked>
-                                                <label class="form-check-label" for="manageStock">Manage Stock</label>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-12 col-md-6">
-                                            <label for="stockQuantity" class="form-label">Stock Quantity</label>
-                                            <input type="number" class="form-control" id="stockQuantity" placeholder="0" min="0">
-                                        </div>
-                                        
-                                        <div class="col-12 col-md-6">
-                                            <label for="lowStockThreshold" class="form-label">Low Stock Threshold</label>
-                                            <input type="number" class="form-control" id="lowStockThreshold" placeholder="5" min="0">
-                                        </div>
-                                        
-                                        <div class="col-12">
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" id="allowBackorders">
-                                                <label class="form-check-label" for="allowBackorders">Allow Backorders</label>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-12 col-md-6">
-                                            <label for="weight" class="form-label">Weight (kg)</label>
-                                            <input type="number" class="form-control" id="weight" placeholder="0.00" step="0.01" min="0">
-                                        </div>
-                                        
-                                        <div class="col-12 col-md-6">
-                                            <label for="dimensions" class="form-label">Dimensions (cm)</label>
-                                            <div class="input-group">
-                                                <input type="number" class="form-control" placeholder="Length" step="0.1" min="0">
-                                                <input type="number" class="form-control" placeholder="Width" step="0.1" min="0">
-                                                <input type="number" class="form-control" placeholder="Height" step="0.1" min="0">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- SEO Tab -->
-                                <div class="tab-pane fade" id="seo" role="tabpanel" aria-labelledby="seo-tab">
-                                    <div class="row g-3">
-                                        <div class="col-12">
-                                            <label for="metaTitle" class="form-label">Meta Title</label>
-                                            <input type="text" class="form-control" id="metaTitle" placeholder="Enter meta title">
-                                            <div class="form-text">Recommended length: 50-60 characters</div>
-                                        </div>
-                                        
-                                        <div class="col-12">
-                                            <label for="metaDescription" class="form-label">Meta Description</label>
-                                            <textarea class="form-control" id="metaDescription" rows="3" placeholder="Enter meta description"></textarea>
-                                            <div class="form-text">Recommended length: 150-160 characters</div>
-                                        </div>
-                                        
-                                        <div class="col-12">
-                                            <label for="metaKeywords" class="form-label">Meta Keywords</label>
-                                            <input type="text" class="form-control" id="metaKeywords" placeholder="Enter keywords separated by commas">
-                                        </div>
-                                        
-                                        <div class="col-12">
-                                            <label for="slug" class="form-label">Product URL Slug</label>
-                                            <div class="input-group">
-                                                <span class="input-group-text text-muted">example.com/product/</span>
-                                                <input type="text" class="form-control" id="slug" placeholder="product-url-slug">
-                                            </div>
-                                        </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="price" class="form-label">Price <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" class="form-control" id="price" name="price" step="0.01" min="0" required>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid price.
                                     </div>
                                 </div>
                             </div>
-                            
-                            <!-- Form Actions -->
-                            <div class="d-flex justify-content-between border-top mt-4 pt-4">
-                                <button type="button" class="btn btn-outline-secondary">
-                                    <i class="bi bi-x-circle me-2"></i>Cancel
-                                </button>
-                                <div>
-                                    <button type="button" class="btn btn-outline-primary me-2">
-                                        <i class="bi bi-save me-2"></i>Save Draft
-                                    </button>
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="bi bi-check-circle me-2"></i>Publish Product
-                                    </button>
+
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Description <span class="text-danger">*</span></label>
+                                <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+                                <div class="invalid-feedback">
+                                    Please provide a product description.
                                 </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="stock" class="form-label">Stock <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="stock" name="stock" min="0" required>
+                                <div class="invalid-feedback">
+                                    Please provide stock quantity.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="category" class="form-label">Category <span class="text-danger">*</span></label>
+                                <select class="form-select" id="category" name="category" required>
+                                    <option value="" disabled selected>Select category</option>
+                                    <?php
+                                    include '../../config/koneksi.php';
+                                    $query = "SELECT id, name FROM categories";
+                                    $result = mysqli_query($conn, $query);
+
+                                    if ($result && mysqli_num_rows($result) > 0) {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            echo '<option value="' . $row['id'] . '">' . htmlspecialchars($row['name']) . '</option>';
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+
+
+                            <div class="mb-3">
+                                <label for="image" class="form-label">Product Image <span class="text-danger">*</span></label>
+                                <input type="file" class="form-control" id="image" name="image" accept="image/*" required onchange="previewImage(this)">
+                                <div class="invalid-feedback">
+                                    Please upload a product image.
+                                </div>
+                                <img id="preview" class="preview-image" alt="Image preview">
+                                <small class="form-text text-muted">Max file size: 2MB. Supported formats: JPG, PNG, GIF.</small>
+                            </div>
+
+                            <div class="d-flex justify-content-between mt-4">
+                                <button type="button" class="btn btn-outline-secondary" onclick="resetForm()">
+                                    Reset
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    Save Product
+                                </button>
                             </div>
                         </form>
                     </div>
                 </div>
-                
+
                 <!-- Footer -->
                 <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
                     <p class="col-md-4 mb-0 text-muted">&copy; 2023 Admin Dashboard</p>
@@ -505,29 +252,46 @@
 
     <!-- Bootstrap 5 JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Form Validation Script -->
+
+
     <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (function () {
-            'use strict'
-
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        // Form validation
+        (function() {
             var forms = document.querySelectorAll('.needs-validation')
-
-            // Loop over them and prevent submission
             Array.prototype.slice.call(forms)
-                .forEach(function (form) {
-                    form.addEventListener('submit', function (event) {
+                .forEach(function(form) {
+                    form.addEventListener('submit', function(event) {
                         if (!form.checkValidity()) {
                             event.preventDefault()
                             event.stopPropagation()
                         }
-
                         form.classList.add('was-validated')
                     }, false)
                 })
         })()
+
+        // Image preview
+        function previewImage(input) {
+            var preview = document.getElementById('preview');
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                preview.style.display = 'none';
+            }
+        }
+
+        // Reset form
+        function resetForm() {
+            document.querySelector('form').reset();
+            document.getElementById('preview').style.display = 'none';
+            document.querySelector('form').classList.remove('was-validated');
+        }
     </script>
 </body>
+
 </html>

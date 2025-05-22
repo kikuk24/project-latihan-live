@@ -1,3 +1,27 @@
+<?php 
+session_start();
+
+if (!isset($_SESSION["user_id"])) {
+    header("Location: ../pages/auth/login.php");
+    exit;
+}
+
+include '../../config/koneksi.php';
+
+$user_id = $_SESSION["user_id"];
+
+$query = "SELECT * FROM users WHERE id = $user_id";
+$result = mysqli_query($conn, $query);
+
+if ($result && mysqli_num_rows($result) === 1) {
+    $user = mysqli_fetch_assoc($result);
+}
+
+if($user['role'] !== 'admin') {
+    header("Location: ../../index.php?error=access_denied");
+    exit;
+}
+?>  
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -108,7 +132,7 @@
                         <div class="dropdown">
                             <button class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
                                 <img src="https://placehold.co/32x32" class="rounded-circle me-2" width="32" height="32" alt="User">
-                                <span>Admin User</span>
+                                <span><?= $user['name']; ?></span>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="#">Profile</a></li>
