@@ -1,5 +1,10 @@
 <?php
 include 'config/koneksi.php';
+
+if (isset($_GET['error'])) {
+    $error = $_GET['error'];
+    echo "<script>alert('$error')</script>";
+}
 ?>
 
 <!DOCTYPE html>
