@@ -5,8 +5,8 @@ $username = "root";
 $password = "";
 $database = "simple_comerce";
 
-$con = mysqli_connect($localhost, $username, $password, $database);
+$conn = mysqli_connect($localhost, $username, $password, $database);
 
-if (!$con) {
+if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
