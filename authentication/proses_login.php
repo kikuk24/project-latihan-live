@@ -21,6 +21,5 @@ if (mysqli_num_rows($result) === 1) {
         exit();
     }
 }
-header("Location: ../pages/auth/login.php?error=1");
-exit();
+exit;
 ?>
