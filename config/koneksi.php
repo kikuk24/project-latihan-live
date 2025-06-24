@@ -1,12 +1,12 @@
 <?php
+$host = "localhost";
+$user = "root"; // sesuaikan username
+$password = "123456"; // sesuaikan password
+$database = "nama_database"; // ganti dengan nama database Anda
 
-$localhost = "localhost";
-$username = "root";
-$password = "123456";
-$database = "simple_shop";
+$conn = new mysqli($host, $user, $password, $database);
 
-$con = mysqli_connect($localhost, $username, $password);
-
-if(!$con) {
-    die("Connection failed: " . mysqli_connect_error());
+if ($conn->connect_error) {
+    die("Koneksi gagal: " . $conn->connect_error);
 }
+?>

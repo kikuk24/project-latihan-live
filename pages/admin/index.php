@@ -1,3 +1,66 @@
+<?php
+session_start();
+require '../config/koneksi.php';
+
+// Cek apakah user adalah admin
+if (!isset($_SESSION['admin'])) {
+    header('Location: ../auth/login.php');
+    exit;
+}
+?>
+
+// Ambil data statistik
+$query_total_users = "SELECT COUNT(*) as total FROM users";
+$result_total_users = $conn->query($query_total_users);
+$total_users = $result_total_users->fetch_assoc()['total'];
+
+$query_total_sales = "SELECT SUM(amount) as total FROM orders";
+$result_total_sales = $conn->query($query_total_sales);
+$total_sales = $result_total_sales->fetch_assoc()['total'] ?: 0;
+
+$query_new_orders = "SELECT COUNT(*) as total FROM orders WHERE order_date >= DATE_SUB(CURDATE(), INTERVAL 1 DAY)";
+$result_new_orders = $conn->query($query_new_orders);
+$new_orders = $result_new_orders->fetch_assoc()['total'];
+
+$query_page_views = "SELECT COUNT(*) as total FROM page_views"; // Contoh tabel page_views
+$result_page_views = $conn->query($query_page_views);
+$page_views = $result_page_views->fetch_assoc()['total'];
+
+// Ambil pesanan terbaru
+$query_recent_orders = "
+    SELECT 
+        o.order_id, 
+        u.name AS customer, 
+        p.product_name, 
+        o.order_date, 
+        o.amount, 
+        o.status 
+    FROM 
+        orders o 
+    LEFT JOIN 
+        users u ON o.user_id = u.id 
+    LEFT JOIN 
+        products p ON o.product_id = p.id 
+    ORDER BY 
+        o.order_date DESC 
+    LIMIT 5;
+";
+$result_recent_orders = $conn->query($query_recent_orders);
+
+// Ambil aktivitas terbaru
+$query_recent_activity = "
+    SELECT 
+        action, 
+        timestamp 
+    FROM 
+        activity_logs 
+    ORDER BY 
+        timestamp DESC 
+    LIMIT 5;
+";
+$result_recent_activity = $conn->query($query_recent_activity);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,44 +83,44 @@
                     </div>
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active text-white" href="#">
+                            <a class="nav-link active text-white" href="index.php">
                                 <i class="bi bi-house-door me-2"></i>
                                 Dashboard
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white-50" href="#">
+                            <a class="nav-link text-white-50" href="orders.php">
                                 <i class="bi bi-file-earmark me-2"></i>
                                 Orders
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white-50" href="#">
+                            <a class="nav-link text-white-50" href="products.php">
                                 <i class="bi bi-cart me-2"></i>
                                 Products
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white-50" href="#">
+                            <a class="nav-link text-white-50" href="customers.php">
                                 <i class="bi bi-people me-2"></i>
                                 Customers
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white-50" href="#">
+                            <a class="nav-link text-white-50" href="reports.php">
                                 <i class="bi bi-bar-chart me-2"></i>
                                 Reports
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white-50" href="#">
+                            <a class="nav-link text-white-50" href="settings.php">
                                 <i class="bi bi-gear me-2"></i>
                                 Settings
                             </a>
                         </li>
                     </ul>
                     
-                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <!--<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                         <span>Saved reports</span>
                     </h6>
                     <ul class="nav flex-column mb-2">
@@ -73,11 +136,12 @@
                                 Last quarter
                             </a>
                         </li>
-                    </ul>
+                    </ul>-->
                 </div>
             </div>
             
             <!-- Main Content -->
+             <h2 class="mt-2 mb-0"><?= $total_users ?></h2>
             <div class="col-md-9 col-lg-10 ms-sm-auto px-md-4">
                 <!-- Header -->
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -111,10 +175,10 @@
                                 <span>Admin User</span>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
-                                <li><a class="dropdown-item" href="#">Settings</a></li>
+                                <li><a class="dropdown-item" href="profile.php">Profile</a></li>
+                                <li><a class="dropdown-item" href="settings.php">Settings</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Sign out</a></li>
+                                <li><a class="dropdown-item" href="../../authentication/logout.php">Sign out</a></li>
                             </ul>
                         </div>
                     </div>
@@ -131,7 +195,7 @@
                                     </div>
                                     <div class="ms-3">
                                         <h6 class="card-title mb-0">Total Users</h6>
-                                        <h2 class="mt-2 mb-0">1,524</h2>
+                                        <h2 class="mt-2 mb-0"><?= $total_users ?></h2>
                                         <p class="text-success mb-0"><i class="bi bi-arrow-up"></i> 12.5%</p>
                                     </div>
                                 </div>
@@ -469,8 +533,25 @@
             </div>
         </div>
     </div>
+    <li><a class="dropdown-item" href="../../authentication/logout.php">Sign out</a></li>
 
     <!-- Bootstrap 5 JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+<?php
+$order_query = "SELECT * FROM orders ORDER BY order_date DESC LIMIT 5";
+$order_result = $conn->query($order_query);
+?>
+
+<?php while ($order = $order_result->fetch_assoc()): ?>
+<tr>
+    <td><?= $order['order_id'] ?></td>
+    <td><?= $order['customer_name'] ?></td>
+    <td><?= $order['product_name'] ?></td>
+    <td><?= $order['order_date'] ?></td>
+    <td>$<?= number_format($order['amount'], 2) ?></td>
+    <td><span class="badge bg-success"><?= $order['status'] ?></span></td>
+</tr>
+<?php endwhile; ?>

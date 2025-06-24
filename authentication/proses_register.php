@@ -1,10 +1,14 @@
-<?php
-$nama = $_POST['nama'];
-$email = $_POST['email'];
-$password = $_POST['password'];
-
+session_start();
 include '../config/koneksi.php';
 
-echo "Nama: " . $nama . "<br>";
-echo "Email: " . $email . "<br>";
-echo "Password: " . $password . "<br>";
+$username = $_POST['username'];
+$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+$role = 'user';
+
+$query = "INSERT INTO users (username, password, role) VALUES ('$username', '$password', '$role')";
+if (mysqli_query($conn, $query)) {
+    header("Location: ../pages/auth/login.php");
+} else {
+    echo "Pendaftaran gagal: " . mysqli_error($conn);
+}
+?>
