@@ -2,7 +2,7 @@
 $host = "localhost";
 $user = "root"; // sesuaikan username
 $password = "123456"; // sesuaikan password
-$database = "nama_database"; // ganti dengan nama database Anda
+$database = "project-latihan-live"; // ganti dengan nama database Anda
 
 $conn = new mysqli($host, $user, $password, $database);
 
