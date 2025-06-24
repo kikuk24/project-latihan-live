@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../config/koneksi.php';
+require '../../config/koneksi.php';
 
 // Cek apakah user adalah admin
 if (!isset($_SESSION['admin'])) {
@@ -8,7 +8,7 @@ if (!isset($_SESSION['admin'])) {
     exit;
 }
 ?>
-
+<?php
 // Ambil data statistik
 $query_total_users = "SELECT COUNT(*) as total FROM users";
 $result_total_users = $conn->query($query_total_users);
@@ -120,23 +120,23 @@ $result_recent_activity = $conn->query($query_recent_activity);
                         </li>
                     </ul>
                     
-                    <!--<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                         <span>Saved reports</span>
                     </h6>
                     <ul class="nav flex-column mb-2">
                         <li class="nav-item">
-                            <a class="nav-link text-white-50" href="#">
+                            <a class="nav-link text-white-50" href="reports.php?period=current_month">
                                 <i class="bi bi-file-text me-2"></i>
                                 Current month
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white-50" href="#">
+                            <a class="nav-link text-white-50" href="reports.php?period=last_quarter">
                                 <i class="bi bi-file-text me-2"></i>
                                 Last quarter
                             </a>
                         </li>
-                    </ul>-->
+                    </ul>
                 </div>
             </div>
             
@@ -185,72 +185,72 @@ $result_recent_activity = $conn->query($query_recent_activity);
                 </div>
                 
                 <!-- Stats Cards -->
-                <div class="row g-3 mb-4">
-                    <div class="col-12 col-sm-6 col-xl-3">
-                        <div class="card border-0 shadow-sm">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                    <div class="bg-primary bg-opacity-10 p-3 rounded">
-                                        <i class="bi bi-people fs-4 text-primary"></i>
-                                    </div>
-                                    <div class="ms-3">
-                                        <h6 class="card-title mb-0">Total Users</h6>
-                                        <h2 class="mt-2 mb-0"><?= $total_users ?></h2>
-                                        <p class="text-success mb-0"><i class="bi bi-arrow-up"></i> 12.5%</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+<div class="row g-3 mb-4">
+    <div class="col-12 col-sm-6 col-xl-3">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="bg-primary bg-opacity-10 p-3 rounded">
+                        <i class="bi bi-people fs-4 text-primary"></i>
                     </div>
-                    <div class="col-12 col-sm-6 col-xl-3">
-                        <div class="card border-0 shadow-sm">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                    <div class="bg-success bg-opacity-10 p-3 rounded">
-                                        <i class="bi bi-cart fs-4 text-success"></i>
-                                    </div>
-                                    <div class="ms-3">
-                                        <h6 class="card-title mb-0">Total Sales</h6>
-                                        <h2 class="mt-2 mb-0">$48,259</h2>
-                                        <p class="text-success mb-0"><i class="bi bi-arrow-up"></i> 8.2%</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-xl-3">
-                        <div class="card border-0 shadow-sm">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                    <div class="bg-warning bg-opacity-10 p-3 rounded">
-                                        <i class="bi bi-bag-check fs-4 text-warning"></i>
-                                    </div>
-                                    <div class="ms-3">
-                                        <h6 class="card-title mb-0">New Orders</h6>
-                                        <h2 class="mt-2 mb-0">256</h2>
-                                        <p class="text-danger mb-0"><i class="bi bi-arrow-down"></i> 3.8%</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-xl-3">
-                        <div class="card border-0 shadow-sm">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                    <div class="bg-info bg-opacity-10 p-3 rounded">
-                                        <i class="bi bi-eye fs-4 text-info"></i>
-                                    </div>
-                                    <div class="ms-3">
-                                        <h6 class="card-title mb-0">Page Views</h6>
-                                        <h2 class="mt-2 mb-0">9,254</h2>
-                                        <p class="text-success mb-0"><i class="bi bi-arrow-up"></i> 24.5%</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="ms-3">
+                        <h6 class="card-title mb-0">Total Users</h6>
+                        <h2 class="mt-2 mb-0"><?= number_format($total_users) ?></h2>
+                        <p class="text-success mb-0"><i class="bi bi-arrow-up"></i> 12.5%</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-xl-3">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="bg-success bg-opacity-10 p-3 rounded">
+                        <i class="bi bi-cart fs-4 text-success"></i>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="card-title mb-0">Total Sales</h6>
+                        <h2 class="mt-2 mb-0">$<?= number_format($total_sales, 2) ?></h2>
+                        <p class="text-success mb-0"><i class="bi bi-arrow-up"></i> 8.2%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-xl-3">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="bg-warning bg-opacity-10 p-3 rounded">
+                        <i class="bi bi-bag-check fs-4 text-warning"></i>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="card-title mb-0">New Orders</h6>
+                        <h2 class="mt-2 mb-0"><?= number_format($new_orders) ?></h2>
+                        <p class="text-danger mb-0"><i class="bi bi-arrow-down"></i> 3.8%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-xl-3">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="bg-info bg-opacity-10 p-3 rounded">
+                        <i class="bi bi-eye fs-4 text-info"></i>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="card-title mb-0">Page Views</h6>
+                        <h2 class="mt-2 mb-0"><?= number_format($page_views) ?></h2>
+                        <p class="text-success mb-0"><i class="bi bi-arrow-up"></i> 24.5%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
                 
                 <!-- Charts Section -->
                 <div class="row g-3 mb-4">
@@ -263,10 +263,10 @@ $result_recent_activity = $conn->query($query_recent_activity);
                                         This Month
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end">
-                                        <li><a class="dropdown-item" href="#">Today</a></li>
-                                        <li><a class="dropdown-item" href="#">This Week</a></li>
-                                        <li><a class="dropdown-item" href="#">This Month</a></li>
-                                        <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    <li><a class="dropdown-item" href="../reports/today.php">Today</a></li>
+                                    <li><a class="dropdown-item" href="../reports/week.php">This Week</a></li>
+                                    <li><a class="dropdown-item" href="../reports/month.php">This Month</a></li>
+                                    <li><a class="dropdown-item" href="../reports/year.php">This Year</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -335,16 +335,16 @@ $result_recent_activity = $conn->query($query_recent_activity);
                                         <td>$120.00</td>
                                         <td><span class="badge bg-success">Completed</span></td>
                                         <td>
-                                            <div class="dropdown">
-                                                <button class="btn btn-sm" type="button" data-bs-toggle="dropdown">
-                                                    <i class="bi bi-three-dots-vertical"></i>
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="#">View</a></li>
-                                                    <li><a class="dropdown-item" href="#">Edit</a></li>
-                                                    <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
-                                                </ul>
-                                            </div>
+                                        <div class="dropdown">
+                                           <button class="btn btn-sm" type="button" data-bs-toggle="dropdown">
+                                             <i class="bi bi-three-dots-vertical"></i>
+                                           </button>
+                                           <ul class="dropdown-menu">
+                                             <li><a class="dropdown-item" href="view_order.php?id=<?= $order['order_id'] ?>">View</a></li>
+                                             <li><a class="dropdown-item" href="edit_order.php?id=<?= $order['order_id'] ?>">Edit</a></li>
+                                             <li><a class="dropdown-item text-danger" href="delete_order.php?id=<?= $order['order_id'] ?>" onclick="return confirm('Yakin ingin menghapus pesanan ini?')">Delete</a></li>
+                                           </ul>
+                                        </div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -355,16 +355,16 @@ $result_recent_activity = $conn->query($query_recent_activity);
                                         <td>$85.00</td>
                                         <td><span class="badge bg-warning text-dark">Pending</span></td>
                                         <td>
-                                            <div class="dropdown">
-                                                <button class="btn btn-sm" type="button" data-bs-toggle="dropdown">
-                                                    <i class="bi bi-three-dots-vertical"></i>
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="#">View</a></li>
-                                                    <li><a class="dropdown-item" href="#">Edit</a></li>
-                                                    <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
-                                                </ul>
-                                            </div>
+                                          <div class="dropdown">
+                                           <button class="btn btn-sm" type="button" data-bs-toggle="dropdown">
+                                             <i class="bi bi-three-dots-vertical"></i>
+                                           </button>
+                                         <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="view_order.php?id=<?= $order['order_id'] ?>">View</a></li>
+                                            <li><a class="dropdown-item" href="edit_order.php?id=<?= $order['order_id'] ?>">Edit</a></li>
+                                            <li><a class="dropdown-item text-danger" href="delete_order.php?id=<?= $order['order_id'] ?>" onclick="return confirm('Yakin ingin menghapus pesanan ini?')">Delete</a></li>
+                                         </ul>
+                                         </div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -380,9 +380,9 @@ $result_recent_activity = $conn->query($query_recent_activity);
                                                     <i class="bi bi-three-dots-vertical"></i>
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="#">View</a></li>
-                                                    <li><a class="dropdown-item" href="#">Edit</a></li>
-                                                    <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
+                                                    <li><a class="dropdown-item" href="view_order.php?id=<?= $order['order_id'] ?>">View</a></li>
+                                                    <li><a class="dropdown-item" href="edit_order.php?id=<?= $order['order_id'] ?>">Edit</a></li>
+                                                    <li><a class="dropdown-item text-danger" href="delete_order.php?id=<?= $order['order_id'] ?>" onclick="return confirm('Yakin ingin menghapus pesanan ini?')">Delete</a></li>
                                                 </ul>
                                             </div>
                                         </td>
@@ -400,9 +400,9 @@ $result_recent_activity = $conn->query($query_recent_activity);
                                                     <i class="bi bi-three-dots-vertical"></i>
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="#">View</a></li>
-                                                    <li><a class="dropdown-item" href="#">Edit</a></li>
-                                                    <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
+                                                    <li><a class="dropdown-item" href="dropdown-item" href="view_order.php?id=<?= $order['order_id'] ?>">View</a></li>
+                                                    <li><a class="dropdown-item" href="edit_order.php?id=<?= $order['order_id'] ?>">Edit</a></li>
+                                                    <li><a class="dropdown-item text-danger" href="delete_order.php?id=<?= $order['order_id'] ?>" onclick="return confirm('Yakin ingin menghapus pesanan ini?')">Delete</a></li>
                                                 </ul>
                                             </div>
                                         </td>
@@ -420,9 +420,9 @@ $result_recent_activity = $conn->query($query_recent_activity);
                                                     <i class="bi bi-three-dots-vertical"></i>
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="#">View</a></li>
-                                                    <li><a class="dropdown-item" href="#">Edit</a></li>
-                                                    <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
+                                                    <li><a class="dropdown-item" href="dropdown-item" href="view_order.php?id=<?= $order['order_id'] ?>">View</a></li>
+                                                    <li><a class="dropdown-item" href="edit_order.php?id=<?= $order['order_id'] ?>">Edit</a></li>
+                                                    <li><a class="dropdown-item text-danger" href="delete_order.php?id=<?= $order['order_id'] ?>" onclick="return confirm('Yakin ingin menghapus pesanan ini?')">Delete</a></li>
                                                 </ul>
                                             </div>
                                         </td>
@@ -497,24 +497,38 @@ $result_recent_activity = $conn->query($query_recent_activity);
                                 <h5 class="card-title mb-0">Quick Actions</h5>
                             </div>
                             <div class="card-body">
-                                <div class="d-grid gap-2">
-                                    <button class="btn btn-primary" type="button">
-                                        <i class="bi bi-plus-circle me-2"></i>Add New Product
-                                    </button>
-                                    <button class="btn btn-outline-primary" type="button">
-                                        <i class="bi bi-people me-2"></i>Manage Users
-                                    </button>
-                                    <button class="btn btn-outline-primary" type="button">
-                                        <i class="bi bi-gear me-2"></i>System Settings
-                                    </button>
-                                    <button class="btn btn-outline-primary" type="button">
-                                        <i class="bi bi-file-earmark-text me-2"></i>Generate Report
-                                    </button>
-                                    <button class="btn btn-outline-primary" type="button">
-                                        <i class="bi bi-question-circle me-2"></i>Help & Support
-                                    </button>
-                                </div>
-                            </div>
+    <div class="d-grid gap-2">
+        <!-- Add New Product -->
+        <a href="products.php" class="btn btn-primary">
+            <i class="bi bi-plus-circle me-2"></i>
+            Add New Product
+        </a>
+
+        <!-- Manage Users -->
+        <a href="customers.php" class="btn btn-outline-primary">
+            <i class="bi bi-people me-2"></i>
+            Manage Users
+        </a>
+
+        <!-- System Settings -->
+        <a href="settings.php" class="btn btn-outline-primary">
+            <i class="bi bi-gear me-2"></i>
+            System Settings
+        </a>
+
+        <!-- Generate Report -->
+        <a href="reports.php" class="btn btn-outline-primary">
+            <i class="bi bi-file-earmark-text me-2"></i>
+            Generate Report
+        </a>
+
+        <!-- Help & Support -->
+        <a href="help.php" class="btn btn-outline-primary">
+            <i class="bi bi-question-circle me-2"></i>
+            Help & Support
+        </a>
+    </div>
+</div></tr>
                         </div>
                     </div>
                 </div>
