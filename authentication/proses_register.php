@@ -10,9 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // Ambil input dan sanitasi
-$username = mysqli_real_escape_string($conn, $_POST['username']);
-$password = $_POST['password'];
-$confirm_password = $_POST['confirm_password'];
+$username = isset($_POST['username']) ? mysqli_real_escape_string($conn, $_POST['username']) : '';
+$password = isset($_POST['password']) ? $_POST['password'] : '';
+$confirm_password = isset($_POST['confirm_password']) ? $_POST['confirm_password'] : '';
+ 
 
 // Validasi input
 if (empty($username) || empty($password) || empty($confirm_password)) {
