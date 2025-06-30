@@ -5,9 +5,10 @@ include '../config/koneksi.php';
 // Cek apakah form dikirim
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Ambil dan bersihkan input
-    $name     = mysqli_real_escape_string($conn, $_POST["name"]);
-    $email    = mysqli_real_escape_string($conn, $_POST["email"]);
-    $password = mysqli_real_escape_string($conn, $_POST["password"]);
+    $name     = isset($_POST["name"]) ? mysqli_real_escape_string($conn, $_POST["name"]) : '';
+    $email    = isset($_POST["email"]) ? mysqli_real_escape_string($conn, $_POST["email"]) : '';
+    $password = isset($_POST["password"]) ? mysqli_real_escape_string($conn, $_POST["password"]) : '';
+
 
     // Validasi input
     if (empty($name) || empty($email) || empty($password)) {
