@@ -1,10 +1,10 @@
 <?php
 session_start();
-require '../../config/koneksi.php';
+require '../config/koneksi.php';
 
 // Cek apakah user adalah admin
 if (!isset($_SESSION['admin'])) {
-    header('Location: ../../auth/login.php');
+    header('Location: ../../auth/login_admin.php');
     exit;
 }
 ?>

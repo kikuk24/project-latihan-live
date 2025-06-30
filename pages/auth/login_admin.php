@@ -98,6 +98,9 @@
         </div>
     </div>
 
+    <!-- Link ke Login User -->
+        <p>Bukan admin? <a href="login_user.php">Login sebagai Pengguna</a></p>
+
     <!-- Bootstrap 5 JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

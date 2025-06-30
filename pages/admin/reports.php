@@ -3,7 +3,7 @@ session_start();
 
 // Cek apakah user adalah admin
 if (!isset($_SESSION['admin'])) {
-    header("Location: ../../auth/login.php");
+    header("Location: ../auth/login_admin.php");
     exit;
 }
 
