@@ -1,57 +1,46 @@
 <?php
-session_start();
+
 include '../config/koneksi.php';
 
-// Pastikan akses hanya dari form POST
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    $_SESSION['error'] = "Akses ditolak.";
-    header("Location: ../pages/auth/register.php");
-    exit;
+// Cek apakah form dikirim
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Ambil dan bersihkan input
+    $name     = mysqli_real_escape_string($conn, $_POST["name"]);
+    $email    = mysqli_real_escape_string($conn, $_POST["email"]);
+    $password = mysqli_real_escape_string($conn, $_POST["password"]);
+
+    // Validasi input
+    if (empty($name) || empty($email) || empty($password)) {
+        echo "Semua field wajib diisi.";
+        exit;
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "Format email tidak valid.";
+        exit;
+    }
+
+    // Cek apakah email sudah terdaftar
+    $check = mysqli_query($conn, "SELECT * FROM users WHERE email = '$email'");
+    if (mysqli_num_rows($check) > 0) {
+        echo "Email sudah terdaftar.";
+        exit;
+    }
+
+    // Hash password
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+    // Simpan ke database
+    $query = "INSERT INTO users (name, email, password) VALUES ('$name', '$email', '$hashedPassword')";
+
+    if (mysqli_query($conn, $query)) {
+        // 🔥 Berhasil! Arahkan ke halaman login
+        header("Location: ../pages/auth/user_login.php");
+        exit; // Sangat penting untuk mencegah eksekusi kode setelah redirect
+    } else {
+        echo "Gagal: " . mysqli_error($conn);
+    }
 }
 
-// Ambil input dan sanitasi
-$username = isset($_POST['username']) ? mysqli_real_escape_string($conn, $_POST['username']) : '';
-$password = isset($_POST['password']) ? $_POST['password'] : '';
-$confirm_password = isset($_POST['confirm_password']) ? $_POST['confirm_password'] : '';
- 
-
-// Validasi input
-if (empty($username) || empty($password) || empty($confirm_password)) {
-    $_SESSION['error'] = "Semua kolom harus diisi.";
-    header("Location: ../pages/auth/register.php");
-    exit;
-}
-
-if ($password !== $confirm_password) {
-    $_SESSION['error'] = "Password tidak cocok.";
-    header("Location: ../pages/auth/register.php");
-    exit;
-}
-
-// Cek apakah username sudah ada
-$check_query = "SELECT * FROM users WHERE username = '$username'";
-$check_result = mysqli_query($conn, $check_query);
-
-if (mysqli_num_rows($check_result) > 0) {
-    $_SESSION['error'] = "Username sudah digunakan.";
-    header("Location: ../pages/auth/register.php");
-    exit;
-}
-
-// Hash password
-$hashed_password = password_hash($password, PASSWORD_DEFAULT);
-$role = 'user'; // Default role
-
-// Simpan ke database
-$query = "INSERT INTO users (username, password, role) VALUES ('$username', '$hashed_password', '$role')";
-
-if (mysqli_query($conn, $query)) {
-    $_SESSION['success'] = "Registrasi berhasil! Silakan login.";
-    header("Location: ../pages/auth/login.php");
-    exit;
-} else {
-    $_SESSION['error'] = "Pendaftaran gagal: " . mysqli_error($conn);
-    header("Location: ../pages/auth/register.php");
-    exit;
-}
+mysqli_close($conn);
 ?>
