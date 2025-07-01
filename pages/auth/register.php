@@ -27,12 +27,12 @@
                         <form action="../../authentication/proses_register.php" method="post">
                             <!-- Name Input -->
                             <div class="mb-4">
-                                <label for="nama" class="form-label">Nama</label>
+                                <label for="name" class="form-label">Nama</label>
                                 <div class="input-group">
                                     <span class="input-group-text bg-light">
                                         <i class="bi bi-person-hearts"></i>
                                     </span>
-                                    <input name="nama" type="text" class="form-control py-2" id="nama" placeholder="masukkan nama kamu" required>
+                                    <input name="name" type="text" class="form-control py-2" id="name" placeholder="masukkan nama kamu" required>
                                 </div>
                             </div>
 
@@ -66,7 +66,7 @@
                                         Remember me
                                     </label>
                                 </div>
-                                <a href="#" class="text-decoration-none">Forgot password?</a>
+                
                             </div>
                             
                             <!-- Register Button -->
@@ -103,7 +103,7 @@
                 
                 <!-- Footer -->
                 <div class="text-center text-muted mt-4">
-                    <small>&copy; 2023 Your Company. All rights reserved.</small>
+                    <small>&copy; 2025 Your Company. All rights reserved.</small>
                 </div>
             </div>
         </div>
